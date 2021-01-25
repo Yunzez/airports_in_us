@@ -127,8 +127,13 @@
   // create country variable, and assign null to it.
   var country = null;
   country = L.geoJson.ajax("assets/us-states.geojson", {
+     onEachFeature: function (feature, layer) {
+         layer.bindPopup(feature.properties.name + ',  Airport number:'+ feature.properties.count);
+     },
       style: style
   }).addTo(mymap);
+
+
 
 
   // Create Leaflet Control Object for Legend
