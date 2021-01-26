@@ -112,7 +112,7 @@
       airports = L.geoJson.ajax("assets/airports.geojson", {
          // The content of the popup window shows airports name, city, and state
          onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.AIRPT_NAME + ",  " + feature.properties.CITY + ",  " + feature.properties.STATE);
+            layer.bindPopup("<h3>" + feature.properties.AIRPT_NAME + "</h3>"  + "<b>" + feature.properties.CITY + "<b>" + "<br> " + feature.properties.STATE);
          },
          pointToLayer: function(feature, latlng) {
             var id = 0;
@@ -124,7 +124,8 @@
             } // "N"
             marker = L.marker(latlng, {
                icon: L.divIcon({
-                  className: 'fa fa-plane marker-color-' + (id + 1).toString()
+                  className: 'fa fa-plane marker-color-' + (id + 1).toString() 
+
                })
             });
             return marker;
@@ -142,30 +143,17 @@
             console.log(cord.lat + ', ' + cord.lng + "   0");
             moveMarker = L.marker(cord, {
                icon: L.divIcon({
-                  className: 'fa fa-ban'
+                  className: 'fa fa-ban fa-2x'
                })
             }).addTo(mymap);
             created = 1;
          } else {
             moveMarker.slideTo(cord, {
-               duration: 100,
+               duration: 800,
                keepAtCenter: false
             });
          }
       });
-
-      // mymap.on('click', function(e){
-      //    cord  = e.latlng;
-      //    console.log(cord.lat + ', ' + cord.lng + "   1");
-      //    if(created !=1){
-      //       moveMarker.slideTo(	cord, {
-      // 	   duration: 2000,
-      // 	   keepAtCenter: false
-      //       });
-      //    }
-      // });
-
-
 
 
 
@@ -206,7 +194,7 @@
       var country = null;
       country = L.geoJson.ajax("assets/us-states.geojson", {
          onEachFeature: function(feature, layer) {
-            layer.bindPopup(feature.properties.name + ',  Airport number:' + feature.properties.count);
+            layer.bindPopup("<h2>" + feature.properties.name + "</h2>" + 'Airport number: ' + feature.properties.count);
          },
          style: style
       }).addTo(mymap);
